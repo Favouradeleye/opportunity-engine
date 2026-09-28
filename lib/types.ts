@@ -1,14 +1,27 @@
-export type UserRole =
-  | "user"
-  | "business"
-  | "admin";
-
 export type VerificationLevel =
   | "unverified"
   | "email_verified"
   | "phone_verified"
-  | "identity_verified"
-  | "business_verified";
+  | "identity_verified";
+
+export type RiskLevel =
+  | "low"
+  | "medium"
+  | "high"
+  | "blocked";
+
+export type TransactionStatus =
+  | "pending"
+  | "held"
+  | "released"
+  | "disputed"
+  | "refunded"
+  | "cancelled";
+
+export type UserRole =
+  | "user"
+  | "business"
+  | "admin";
 
 export type OpportunityType =
   | "job"
@@ -16,36 +29,7 @@ export type OpportunityType =
   | "project"
   | "product"
   | "skill_exchange"
-  | "partnership"
-  | "other";
-
-export type OpportunityStatus =
-  | "draft"
-  | "published"
-  | "matched"
-  | "in_progress"
-  | "completed"
-  | "cancelled";
-
-export type TransactionStatus =
-  | "pending"
-  | "authorized"
-  | "held"
-  | "released"
-  | "refunded"
-  | "disputed"
-  | "cancelled";
-
-export type SubscriptionPlan =
-  | "free"
-  | "premium"
-  | "business";
-
-export type RiskLevel =
-  | "low"
-  | "medium"
-  | "high"
-  | "blocked";
+  | "partnership";
 
 export interface User {
   id: string;
@@ -55,42 +39,29 @@ export interface User {
   currency: string;
   role: UserRole;
   verificationLevel: VerificationLevel;
-  subscriptionPlan: SubscriptionPlan;
   createdAt: string;
 }
 
 export interface Opportunity {
   id: string;
   ownerId: string;
+  type: OpportunityType;
   title: string;
   description: string;
-  type: OpportunityType;
-  status: OpportunityStatus;
-  country: string;
+  location: string;
+  budget: number | null;
   currency: string;
-  budget?: number;
-  createdAt: string;
-}
-
-export interface Match {
-  id: string;
-  opportunityId: string;
-  userId: string;
-  score: number;
-  reason: string;
-  createdAt: string;
-}
-
-export interface Transaction {
-  id: string;
-  senderId: string;
-  receiverId: string;
-  opportunityId?: string;
-  amount: number;
-  currency: string;
-  status: TransactionStatus;
   riskLevel: RiskLevel;
+  status: "active" | "paused" | "completed" | "blocked";
   createdAt: string;
+}
+
+export interface FinancialProfile {
+  userId: string;
+  totalExpenses: number;
+  totalSaved: number;
+  emergencyFund: number;
+  currency: string;
 }
 
 export interface SavingsGoal {
@@ -100,25 +71,28 @@ export interface SavingsGoal {
   targetAmount: number;
   currentAmount: number;
   currency: string;
-  targetDate?: string;
-  createdAt: string;
+  deadline: string | null;
+  status: "active" | "completed" | "cancelled";
 }
 
-export interface Expense {
+export interface Transaction {
   id: string;
-  userId: string;
+  senderId: string;
+  receiverId: string;
+  opportunityId: string | null;
   amount: number;
   currency: string;
-  category: string;
-  description?: string;
-  date: string;
+  riskLevel: RiskLevel;
+  status: TransactionStatus;
+  createdAt: string;
 }
 
-export interface Business {
+export interface VideoVerification {
   id: string;
-  ownerId: string;
-  name: string;
-  country: string;
-  verificationLevel: VerificationLevel;
+  userId: string;
+  opportunityId: string | null;
+  authenticityRisk: RiskLevel;
+  identityVerificationRequired: boolean;
+  manualReviewRequired: boolean;
   createdAt: string;
-  }
+}
