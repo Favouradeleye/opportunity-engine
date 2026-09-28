@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const financialTools = [
   {
     title: "Track expenses",
@@ -48,21 +50,30 @@ export default function FinancePage() {
       <section className="container py-8">
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="card">
-            <p className="text-sm text-slate-500">Total expenses</p>
+            <p className="text-sm text-slate-500">
+              Total expenses
+            </p>
+
             <p className="mt-2 text-3xl font-bold text-slate-900">
               ₦0
             </p>
           </div>
 
           <div className="card">
-            <p className="text-sm text-slate-500">Total saved</p>
+            <p className="text-sm text-slate-500">
+              Total saved
+            </p>
+
             <p className="mt-2 text-3xl font-bold text-slate-900">
               ₦0
             </p>
           </div>
 
           <div className="card">
-            <p className="text-sm text-slate-500">Emergency fund</p>
+            <p className="text-sm text-slate-500">
+              Emergency fund
+            </p>
+
             <p className="mt-2 text-3xl font-bold text-slate-900">
               Getting started
             </p>
@@ -86,11 +97,36 @@ export default function FinancePage() {
                 {tool.description}
               </p>
 
-              <button className="primary-button mt-5">
+              <Link
+                href="/login"
+                className="primary-button mt-5 inline-block"
+              >
                 {tool.action}
-              </button>
+              </Link>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="container pb-8">
+        <div className="card">
+          <h2 className="text-xl font-bold text-slate-900">
+            Premium financial tools
+          </h2>
+
+          <p className="mt-2 text-slate-600">
+            Advanced forecasting, multiple savings goals, household
+            budgeting, detailed spending analysis and personalized
+            financial planning will be available through the appropriate
+            subscription plan.
+          </p>
+
+          <Link
+            href="/login"
+            className="secondary-button mt-5 inline-block"
+          >
+            View account plans
+          </Link>
         </div>
       </section>
 
@@ -101,9 +137,16 @@ export default function FinancePage() {
           </h2>
 
           <p className="mt-2 text-slate-600">
-            Your personalized financial planning tools will appear here as
-            your account becomes active.
+            Your personalized financial planning tools will appear here
+            after your account is connected.
           </p>
+
+          <Link
+            href="/account"
+            className="secondary-button mt-5 inline-block"
+          >
+            Go to account
+          </Link>
         </div>
       </section>
     </main>
