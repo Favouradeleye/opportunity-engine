@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const categories = [
   "All",
   "Jobs",
@@ -40,7 +42,11 @@ export default function OpportunitiesPage() {
     <main className="min-h-screen bg-slate-50">
       <header className="border-b bg-white">
         <div className="container py-6">
-          <h1 className="text-3xl font-bold text-slate-900">
+          <p className="text-sm font-semibold text-blue-600">
+            OPPORTUNITY MARKETPLACE
+          </p>
+
+          <h1 className="mt-2 text-3xl font-bold text-slate-900">
             Opportunities
           </h1>
 
@@ -71,7 +77,8 @@ export default function OpportunitiesPage() {
             {categories.map((category) => (
               <button
                 key={category}
-                className="whitespace-nowrap rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold"
+                type="button"
+                className="whitespace-nowrap rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
               >
                 {category}
               </button>
@@ -81,7 +88,7 @@ export default function OpportunitiesPage() {
       </section>
 
       <section className="container pb-12">
-        <div className="mb-5 flex items-center justify-between">
+        <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">
               Discover opportunities
@@ -93,7 +100,12 @@ export default function OpportunitiesPage() {
             </p>
           </div>
 
-          <button className="primary-button">Create opportunity</button>
+          <Link
+            href="/login"
+            className="primary-button inline-block"
+          >
+            Create opportunity
+          </Link>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -121,11 +133,35 @@ export default function OpportunitiesPage() {
                 </span>
               </div>
 
-              <button className="secondary-button mt-5 w-full">
+              <Link
+                href="/login"
+                className="secondary-button mt-5 block w-full text-center"
+              >
                 View opportunity
-              </button>
+              </Link>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="container pb-16">
+        <div className="card">
+          <h2 className="text-xl font-bold text-slate-900">
+            Safe opportunities
+          </h2>
+
+          <p className="mt-2 text-slate-600">
+            Opportunity Engine is being designed with account verification,
+            risk detection, protected transactions, dispute handling and
+            fraud reporting built into the platform.
+          </p>
+
+          <Link
+            href="/account"
+            className="secondary-button mt-5 inline-block"
+          >
+            Security & verification
+          </Link>
         </div>
       </section>
     </main>
