@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 const features = [
   {
@@ -21,27 +22,42 @@ const features = [
 ];
 
 const quickActions = [
-  "Find an opportunity",
-  "Offer a skill or service",
-  "Create a savings goal",
-  "Track an expense",
+  {
+    title: "Find an opportunity",
+    href: "/opportunities",
+  },
+  {
+    title: "Offer a skill or service",
+    href: "/opportunities",
+  },
+  {
+    title: "Create a savings goal",
+    href: "/finance",
+  },
+  {
+    title: "Track an expense",
+    href: "/finance",
+  },
 ];
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50">
       <header className="border-b bg-white">
-        <div className="container flex items-center justify-between py-4">
+        <div className="container flex items-center justify-between gap-4 py-4">
           <div>
             <h1 className="text-xl font-bold text-slate-900">
               Opportunity Engine
             </h1>
+
             <p className="text-sm text-slate-500">
               Turn what you have into opportunities.
             </p>
           </div>
 
-          <button className="primary-button">Sign in</button>
+          <Link href="/login" className="primary-button">
+            Sign in
+          </Link>
         </div>
       </header>
 
@@ -65,13 +81,19 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <button className="primary-button">
+            <Link
+              href="/opportunities"
+              className="primary-button"
+            >
               Find an opportunity
-            </button>
+            </Link>
 
-            <button className="secondary-button">
+            <Link
+              href="/login"
+              className="secondary-button"
+            >
               Offer something
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -79,17 +101,19 @@ export default function Home() {
       <section className="container pb-10">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {quickActions.map((action) => (
-            <button
-              key={action}
+            <Link
+              key={action.title}
+              href={action.href}
               className="card text-left transition hover:-translate-y-1"
             >
               <span className="text-lg font-semibold text-slate-900">
-                {action}
+                {action.title}
               </span>
+
               <span className="mt-2 block text-sm text-slate-500">
-                Get started
+                Get started →
               </span>
-            </button>
+            </Link>
           ))}
         </div>
       </section>
@@ -109,6 +133,33 @@ export default function Home() {
               </p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="container pb-16">
+        <div className="card">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold text-blue-600">
+              BUILT AROUND TRUST
+            </p>
+
+            <h2 className="mt-2 text-2xl font-bold text-slate-900">
+              Opportunities should create value, not unnecessary risk.
+            </h2>
+
+            <p className="mt-3 text-slate-600">
+              Our platform is being designed with verification, fraud
+              detection, protected transactions, dispute handling and
+              financial-wellness tools at its core.
+            </p>
+
+            <Link
+              href="/account"
+              className="secondary-button mt-6 inline-block"
+            >
+              Account & security
+            </Link>
+          </div>
         </div>
       </section>
     </main>
