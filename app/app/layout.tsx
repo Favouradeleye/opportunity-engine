@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navigation from "./navigation";
 
 export const metadata: Metadata = {
   title: "Opportunity Engine",
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }
